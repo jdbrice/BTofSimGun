@@ -10,3 +10,5 @@ temp_gccflags.c
 *.cvsignore
 log
 log_*
+*.fzd
+*.vscode

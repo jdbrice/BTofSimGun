@@ -4,16 +4,20 @@ class StMaker;
 
 void bfcRunner( int nevt, char* chain_opts, char* filename ){
 
+	// needed since I use the StMuTrack
+	gSystem->Load( "St_base" );
+	gSystem->Load("StarClassLibrary");
+	// gSystem->Load("StStrangeMuDstMaker");
+	// gSystem->Load("StMuDSTMaker");
+
 	gROOT->LoadMacro("./bfc.C");
+
 	bfc( -1, chain_opts, filename );
 
 	gSystem->Load("FemtoDstFormat");
 	gSystem->Load("McFemtoDstWriter");
 
-	// needed since I use the StMuTrack
-	gSystem->Load("StarClassLibrary");
-	gSystem->Load("StStrangeMuDstMaker");
-	gSystem->Load("StMuDSTMaker");
+	
 
 	// StMcEventMaker *mcEvent = new StMcEventMaker();
 	// StAssociationMaker *association = new StAssociationMaker( );       // TPC association maker

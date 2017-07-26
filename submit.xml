@@ -1,14 +1,14 @@
-<job  name="Pythia_StarSim_BFC"  simulateSubmission ="false" nProcesses="500" >
+<job  name="Pythia_StarSim_BFC"  simulateSubmission ="false" nProcesses="1000" >
 
 	<stdout URL="file:/star/data03/pwg/jdb/scratch/log/log_$JOBID.log" />
 	<stderr URL="file:/star/data03/pwg/jdb/scratch/log/err_$JOBID.err" />
 
-	<output fromScratch="*FemtoDst.root" toURL="file:/star/data03/pwg/jdb/scratch/MtdSimGun/" />
+	<output fromScratch="*FemtoDst.root" toURL="file:/star/data03/pwg/jdb/scratch/BTofSimGun/" />
 	<!-- <output fromScratch="*.fzd" toURL="file:/star/data03/pwg/jdb/scratch/MtdSimGun/" /> -->
 
 	<command>
-		starver SL15c
-		./run.sh pion_SL15c_$JOBID
+		starver SL17d
+		./run.sh equalN_SL17d_RFF_$JOBID
 	</command>
 
 	<SandBox>

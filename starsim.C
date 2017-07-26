@@ -37,11 +37,27 @@ void trig( Int_t n=1 )
 {
   for ( Int_t i=0; i<n; i++ ) {
     chain->Clear();
-    kinematics->Kine( 50, "pi-", 1.0, 1.5, -0.5, 0.5 );
-    kinematics->Kine( 50, "pi+", 1.0, 1.5, -0.5, 0.5 );
+    
 
-    // kinematics->Kine( 10, "mu-", 1.0, 1.6, -0.5, 0.5 );
-    // kinematics->Kine( 10, "mu+", 1.0, 1.6, -0.5, 0.5 );
+    // make sure to hit the VPD!
+    kinematics->Kine( 10, "pi-", 2.4, 6, -5.2, -4.1 );
+    kinematics->Kine( 10, "pi+", 2.4, 6, -5.2, -4.1 );
+    
+    kinematics->Kine( 10, "pi-", 2.4, 6, 4.1, 5.2 );
+    kinematics->Kine( 10, "pi+", 2.4, 6, 4.1, 5.2 );
+
+
+    kinematics->Kine( 10, "pi-", 0.17, 0.4, -0.5, 0.5 );
+    kinematics->Kine( 10, "pi+", 0.17, 0.4, -0.5, 0.5 );
+
+    kinematics->Kine( 10, "K-", 0.17, 0.4, -0.5, 0.5 );
+    kinematics->Kine( 10, "K+", 0.17, 0.4, -0.5, 0.5 );
+
+    kinematics->Kine( 10, "mu-", 0.17, 0.4, -0.5, 0.5 );
+    kinematics->Kine( 10, "mu+", 0.17, 0.4, -0.5, 0.5 );
+
+    kinematics->Kine( 10, "e-", 0.17, 0.4, -0.5, 0.5 );
+    kinematics->Kine( 10, "e+", 0.17, 0.4, -0.5, 0.5 );
 
     chain->Make();
   }
@@ -123,7 +139,7 @@ void starsim( Int_t nevents=50, Int_t rngSeed=1234 )
   // otherwise, particles outside of the specified range are cut.
   //
   //                    etamin etamax
-   primary->SetEtaRange( -0.7, +0.7 );
+   primary->SetEtaRange( -700, +700 );
   //
   //  phirange will be mapped into 0 to 2 pi internally.
   //

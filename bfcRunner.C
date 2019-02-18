@@ -33,6 +33,9 @@ void bfcRunner( int nevt, char* chain_opts, char* filename ){
 	// cout << "ADDING fmtWriter = " << chain->AddAfter("StMcEventMaker", fmtWriter ) << endl;
 	cout << "ADDING fmtWriter = " << chain->AddAfter("StAssociationMaker", fmtWriter ) << endl;
 
+	StBTofMatchMaker * btofMM = (StBTofMatchMaker*) chain->GetMaker( "btofMatch" );
+	btofMM->setCalculateAlign(kTRUE);
+
 	StMaker::lsMakers(chain);
 	chain->PrintInfo();
 	chain->Init();

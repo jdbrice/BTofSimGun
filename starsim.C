@@ -40,24 +40,27 @@ void trig( Int_t n=1 )
     
 
     // make sure to hit the VPD!
-    kinematics->Kine( 10, "pi-", 2.4, 6, -5.2, -4.1 );
-    kinematics->Kine( 10, "pi+", 2.4, 6, -5.2, -4.1 );
+    //kinematics->Kine( 10, "pi-", 2.4, 6, -5.2, -4.1 );
+    //kinematics->Kine( 10, "pi+", 2.4, 6, -5.2, -4.1 );
     
-    kinematics->Kine( 10, "pi-", 2.4, 6, 4.1, 5.2 );
-    kinematics->Kine( 10, "pi+", 2.4, 6, 4.1, 5.2 );
+    //kinematics->Kine( 10, "pi-", 2.4, 6, 4.1, 5.2 );
+    //kinematics->Kine( 10, "pi+", 2.4, 6, 4.1, 5.2 );
 
 
-    kinematics->Kine( 10, "pi-", 0.17, 0.4, -0.5, 0.5 );
-    kinematics->Kine( 10, "pi+", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "pi-", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "pi+", 0.17, 0.4, -0.5, 0.5 );
 
-    kinematics->Kine( 10, "K-", 0.17, 0.4, -0.5, 0.5 );
-    kinematics->Kine( 10, "K+", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "K-", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "K+", 0.17, 0.4, -0.5, 0.5 );
+	
+    //kinematics->Kine( 10, "p", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "pbar", 0.17, 0.4, -0.5, 0.5 );
 
-    kinematics->Kine( 10, "mu-", 0.17, 0.4, -0.5, 0.5 );
-    kinematics->Kine( 10, "mu+", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "mu-", 0.17, 0.4, -0.5, 0.5 );
+    //kinematics->Kine( 10, "mu+", 0.17, 0.4, -0.5, 0.5 );
 
-    kinematics->Kine( 10, "e-", 0.17, 0.4, -0.5, 0.5 );
-    kinematics->Kine( 10, "e+", 0.17, 0.4, -0.5, 0.5 );
+    kinematics->Kine( 20, "e-", 0.17, 1, -1.1, 1.1 );
+    kinematics->Kine( 20, "e+", 0.17, 1, -1.1, 1.1 );
 
     chain->Make();
   }
@@ -154,7 +157,7 @@ void starsim( Int_t nevents=50, Int_t rngSeed=1234 )
   //   z = 0 gauss width = 30cm
   // 
   primary->SetVertex( 0., 0., 0. );
-  primary->SetSigma( 0.1, 0.1, 6.0 );
+  primary->SetSigma( 0.1, 0.1, 40.0 );
 
   //
   // Initialize primary event generator and all sub makers
@@ -164,7 +167,7 @@ void starsim( Int_t nevents=50, Int_t rngSeed=1234 )
   //
   // Setup geometry and set starsim to use agusread for input
   //
-  geometry("y2014a field=-5.0");
+  geometry("y2014a");
   command("gkine -4 0");
   command("gfile o pythia6.starsim.fzd");
   

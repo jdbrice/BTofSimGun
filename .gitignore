@@ -12,3 +12,5 @@ log
 log_*
 *.fzd
 *.vscode
+.sl73_gcc485/
+sandbox/

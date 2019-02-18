@@ -8,13 +8,13 @@
 
 	<command>
 		starver SL17d
-		./run.sh equalN_SL17d_RFF_$JOBID
+		./run.sh n500_SL17d_FF_$JOBID
 	</command>
 
 	<SandBox>
 		<Package>
 			<File>file:./StRoot</File>
-			<File>file:./.sl64_gcc482</File>
+			<File>file:./.sl73_gcc485</File>
 			<File>file:./run.sh</File>
 			<File>file:./runStarSim.sh</File>
 			<File>file:./runBFC.sh</File>

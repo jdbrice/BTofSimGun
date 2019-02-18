@@ -8,7 +8,7 @@ echo "Nevents=$2"
 # root4star -b -q -l 'bfcRunner.C( 5, "fzin, y2014a UseXgeom AgML StarMagField FieldOn TpcFastSim VFMinuit ITTF tpcDB MakeEvent vpdSim btofSim btofMixer btofMatch McEvent IdTruth McAss CMuDst", "'$1'" )'
 
 
-root4star -b -q -l 'bfcRunner.C( 5, "y2014a fzin TpcFastSim Simu sfs ssdfast McEvOut Sti IdTruth McAna tpc_T globT tls db tpcDB ssdIT ITTF VFMinuit Idst event analysis EventQA tags EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+root4star -b -q -l 'bfcRunner.C( '$2', "y2014a fzin TpcFastSim Simu sfs ssdfast McEvOut Sti IdTruth McAna tpc_T globT tls db tpcDB ssdIT ITTF VFMinuit Idst event analysis EventQA tags EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
 
 
 

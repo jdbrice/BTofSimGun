@@ -93,8 +93,8 @@ void trig( Int_t n=1 )
     for ( int i = 0; i < 10; i ++ ){
       StarGenParticle * la = kinematics->AddParticle( "Lambda0" );
     la->SetStatus(StarGenParticle::kFinal);
-    la->SetPx( 0.0 );
-    la->SetPy( 0.0 );
+    la->SetPx( 1.0 );
+    la->SetPy( 1.0 );
     la->SetPz( 0.0 );
     
     la->SetVx(0.0);

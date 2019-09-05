@@ -42,5 +42,5 @@ void bfcRunner( int nevt, char* chain_opts, char* filename ){
 	chain->EventLoop(nevt);
 	chain->Finish();
 
-	delete chain;
+	//delete chain;
 }

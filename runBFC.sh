@@ -4,11 +4,22 @@ echo "Running BFC on $1"
 echo "Nevents=$2"
 
 
+# version based on P2010a chain
+
+#root4star -b -q -l 'bfcRunner.C( '$2', "DbV20101213 P2010a pmdReco btofSim btof BEmcChkStat Corr4 OSpaceZ2 OGridLeak3D VFMCE TpxClu -VFMinuit -hitfilt -in gen_T,geomT,sim_T,TpcRS,-ittf,-tpc_daq,nodefault", "'$1'")'
+
+
 #bottom up, working very fast but no MTD info in output
 # root4star -b -q -l 'bfcRunner.C( 5, "fzin, y2014a UseXgeom AgML StarMagField FieldOn TpcFastSim VFMinuit ITTF tpcDB MakeEvent vpdSim btofSim btofMixer btofMatch McEvent IdTruth McAss CMuDst", "'$1'" )'
 
 
-root4star -b -q -l 'bfcRunner.C( '$2', "y2014a fzin TpcFastSim Simu sfs ssdfast McEvOut Sti IdTruth McAna tpc_T globT tls db tpcDB ssdIT ITTF VFMinuit Idst event analysis EventQA tags EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+
+#works with TpcFastSim
+#root4star -b -q -l 'bfcRunner.C( '$2', "y2010 fzin TpcFastSim ITTF  McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+
+root4star -b -q -l 'bfcRunner.C( '$2', "y2017 fzin TpcRS TpxClu TpcHitMover ITTF McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+
+#root4star -b -q -l 'bfcRunner.C( '$2', "y2014a fzin TpcFastSim Simu sfs ssdfast McEvOut Sti IdTruth McAna tpc_T globT tls db tpcDB ssdIT ITTF VFMinuit Idst event analysis EventQA tags EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
 
 
 

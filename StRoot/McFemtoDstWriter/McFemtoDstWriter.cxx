@@ -16,6 +16,7 @@
 #include "StEvent/StRunInfo.h"
 #include "StEvent/StEventInfo.h"
 #include "StEvent/StPrimaryVertex.h"
+#include "StEvent/StTrackGeometry.h"
 
 
 #include "StMcEvent/StMcEvent.hh"
@@ -27,6 +28,8 @@
 #include "StAssociationMaker/StTrackPairInfo.hh"
 
 #include "StarClassLibrary/StParticleDefinition.hh"
+
+
 
 // STL
 #include <vector>
@@ -132,11 +135,11 @@ Int_t McFemtoDstWriter::Make()
 
 	// RESET containers
 	this->_fmcw.reset();
-	this->_fmcvertw.reset();
+	// this->_fmcvertw.reset();
 	this->_ftw.reset();
-	this->_fhw.reset();
-	this->_fmtdw.reset();
-	this->_fbtofw.reset();
+	// this->_fhw.reset();
+	// this->_fmtdw.reset();
+	// this->_fbtofw.reset();
 
 	
 	StSPtrVecTrackNode &trackNodes = this->_StEvent->trackNodes();
@@ -149,15 +152,17 @@ Int_t McFemtoDstWriter::Make()
 		StTrackNode *track = this->_StEvent->trackNodes()[ iTrack ];
 
 		this->_fmtTrack.reset();
-		addMtdPidTraits( track );
+		// addMtdPidTraits( track );
 		addBTofPidTraits( track );
 		addTrackHelix( track );
 		addTrack( track );
+
 	}
+	// LOG_INFO << "_ftw._n =" << _ftw.N() << endm;
 
 	// TRACKS
 	/*********************************************************/
-	
+
 
 	/*********************************************************/
 	// MCTRACKS
@@ -352,6 +357,11 @@ void McFemtoDstWriter::addTrack( StTrackNode *node )
 	StGlobalTrack * globalTrack = dynamic_cast<StGlobalTrack*>(node->track(global));
 	StTrack * primaryTrack = node->track( primary );
 
+	LOG_INFO << "StTrack globalPt " << globalTrack->geometry()->momentum().perp() << endm;
+	if ( primaryTrack ){
+		LOG_INFO << "StTrack primaryPt " << primaryTrack->geometry()->momentum().perp() << endm;
+	}
+
 	const StVertex *vtx = nullptr;
 	if ( primaryTrack )
 		vtx = primaryTrack->vertex();
@@ -364,30 +374,32 @@ void McFemtoDstWriter::addTrack( StTrackNode *node )
 		LOG_INFO << "WARN, null StMuTrack" << endm;
 		return;
 	}
-	// LOG_INFO << "nHitsPoss = " << globalTrack->numberOfPossiblePoints() << " == " << muTrack->nHitsPoss() << endm << endl;
-	// LOG_INFO << "nHitsFit = " << globalTrack->fitTraits().numberOfFitPoints() << " == " << muTrack->nHitsFit() << endm << endl;
-	// LOG_INFO << "dEdx = " << muTrack->dEdx() << endm;
+	LOG_INFO << "nHitsPoss = " << globalTrack->numberOfPossiblePoints() << " == " << muTrack->nHitsPoss() << endm << endl;
+	LOG_INFO << "nHitsFit = " << globalTrack->fitTraits().numberOfFitPoints() << " == " << muTrack->nHitsFit() << endm << endl;
+	LOG_INFO << "dEdx = " << muTrack->dEdx() << endm;
 
 	this->_fmtTrack.mNHitsMax = muTrack->nHitsPoss();
 	this->_fmtTrack.mNHitsFit = muTrack->nHitsFit() * muTrack->charge();
 	this->_fmtTrack.mNHitsDedx = muTrack->nHitsDedx();
 
-	this->_fmtTrack.dEdx( muTrack->dEdx() * 1.e6 );
-	this->_fmtTrack.nSigmaElectron( muTrack->nSigmaElectron() );
-	this->_fmtTrack.nSigmaPion( muTrack->nSigmaPion() );
-	this->_fmtTrack.nSigmaKaon( muTrack->nSigmaKaon() );
-	this->_fmtTrack.nSigmaProton( muTrack->nSigmaProton() );
+	this->_fmtTrack.mDedx = ( muTrack->dEdx() * 1.e6 );
+	// this->_fmtTrack.nSigmaElectron( muTrack->nSigmaElectron() );
+	// this->_fmtTrack.nSigmaPion( muTrack->nSigmaPion() );
+	// this->_fmtTrack.nSigmaKaon( muTrack->nSigmaKaon() );
+	// this->_fmtTrack.nSigmaProton( muTrack->nSigmaProton() );
 
 	StThreeVectorF p = muTrack->p();
+	LOG_INFO << "MuTrack Pt = " << p.perp() << endm;
 	this->_fmtTrack.mPt  = p.perp();
 	this->_fmtTrack.mEta = p.pseudoRapidity();
 	this->_fmtTrack.mPhi = p.phi();
 
 	this->_fmtTrack.mId = muTrack->id() - 1; // id starts at 1
-	
-	this->_fmtTrack.gDCA( calculateDCA( globalTrack, this->_pvPosition ) );
-
+	this->_fmtTrack.mDCA = calculateDCA( globalTrack, this->_pvPosition );
 	this->_ftw.add( this->_fmtTrack );
+
+
+	LOG_INFO << "nHitsFit = " << this->_fmtTrack.mNHitsFit << endm;
 }
 
 
@@ -452,11 +464,12 @@ void McFemtoDstWriter::addMtdPidTraits( StTrackNode *node )
 void McFemtoDstWriter::addBTofPidTraits( StTrackNode *node )
 {
 	
-
+	LOG_INFO << "addBTofPidTraits(...)" << endm;
 	StTrack *track = node->track( primary );
 	if ( nullptr == track ) 
 		return;
 	StPtrVecTrackPidTraits traits = track->pidTraits(kTofId);
+	LOG_INFO << "BTofPidTraits size " << traits.size() << endm;
 	
 	if ( traits.size() <= 0 )
 		return;
@@ -480,15 +493,16 @@ void McFemtoDstWriter::addBTofPidTraits( StTrackNode *node )
 	StBTofHit *hit = btofPid->tofHit();
 
 	this->_fmtBTofPid.reset();
-	this->_fmtBTofPid.yLocal (btofPid->yLocal() );
-	this->_fmtBTofPid.zLocal( btofPid->zLocal() );
+	this->_fmtBTofPid.mBTofYLocal = (btofPid->yLocal() );
+	this->_fmtBTofPid.mBTofZLocal = ( btofPid->zLocal() );
 	this->_fmtBTofPid.matchFlag( btofPid->matchFlag() );
 	this->_fmtBTofPid.mIdTruth  =  btofPid->tofHit()->idTruth() - 1; // minus 1 to index at 0
-	
+	this->_fmtBTofPid.mLength   = btofPid->pathLength();
+
 	double b = btofPid->beta();
 	if ( b < 0 )
 		b = 0;
-	this->_fmtBTofPid.beta( b );
+	this->_fmtBTofPid.mBTofBeta = ( b );
 
 
 	this->_fmtTrack.mBTofPidTraitsIndex = this->_fbtofw.N();

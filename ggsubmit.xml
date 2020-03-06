@@ -1,4 +1,4 @@
-<job  name="Pythia_StarSim_BFC"  simulateSubmission ="false" nProcesses="1000" >
+<job  name="Pythia_StarSim_BFC"  simulateSubmission ="false" nProcesses="800" >
 
 	<stdout URL="file:/star/data03/pwg/jdb/scratch/log/log_$JOBID.log" />
 	<stderr URL="file:/star/data03/pwg/jdb/scratch/log/err_$JOBID.err" />
@@ -9,9 +9,9 @@
 	<command>
 		starver SL17d
 
-		cp -f /star/data03/pwg/jdb/upc/starlight.root ./starlight.root
+		cp -f /star/data03/pwg/jdb/upc/starlight_rho.root ./starlight.root
 
-		./rungg.sh n500_gg_SL17d_y2017_FF_$JOBID
+		./rungg.sh rho_SL17d_y2017_FF_DDTOF_$JOBID
 	</command>
 
 	<SandBox>

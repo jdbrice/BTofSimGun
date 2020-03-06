@@ -15,9 +15,9 @@ echo "Nevents=$2"
 
 
 #works with TpcFastSim
-#root4star -b -q -l 'bfcRunner.C( '$2', "y2010 fzin TpcFastSim ITTF  McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+root4star -b -q -l 'bfcRunner.C( '$2', "y2010 fzin TpcFastSim ITTF  McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
 
-root4star -b -q -l 'bfcRunner.C( '$2', "y2017 fzin TpcRS TpxClu TpcHitMover ITTF McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
+# root4star -b -q -l 'bfcRunner.C( '$2', "y2017 fzin TpcRS TpxClu TpcHitMover ITTF McEvOut IdTruth McAna tpc_T globT db tpcDB VFMCE Idst event analysis EventQA EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
 
 #root4star -b -q -l 'bfcRunner.C( '$2', "y2014a fzin TpcFastSim Simu sfs ssdfast McEvOut Sti IdTruth McAna tpc_T globT tls db tpcDB ssdIT ITTF VFMinuit Idst event analysis EventQA tags EvOut StarMagField FieldOn IAna CMuDst vpdSim btofSim btofMixer btofMatch McAss", "'$1'" )'
 

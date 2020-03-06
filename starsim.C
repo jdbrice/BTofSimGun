@@ -40,11 +40,11 @@ void trig( Int_t n=1 )
     
 
     // make sure to hit the VPD!
-    // kinematics->Kine( 10, "pi-", 2.4, 6, -5.2, -4.1 );
-    // kinematics->Kine( 10, "pi+", 2.4, 6, -5.2, -4.1 );
+    //kinematics->Kine( 10, "pi-", 12.4, 60, -5.2, -4.1 );
+    //kinematics->Kine( 10, "pi+", 12.4, 60, -5.2, -4.1 );
     
-    //kinematics->Kine( 10, "pi-", 2.4, 6, 4.1, 5.2 );
-    //kinematics->Kine( 10, "pi+", 2.4, 6, 4.1, 5.2 );
+    //kinematics->Kine( 10, "pi-", 12.4, 60, 4.1, 5.2 );
+    //kinematics->Kine( 10, "pi+", 12.4, 60, 4.1, 5.2 );
 
 
     //kinematics->Kine( 10, "pi-", 0.17, 0.4, -0.5, 0.5 );
@@ -59,8 +59,8 @@ void trig( Int_t n=1 )
     //kinematics->Kine( 10, "mu-", 0.17, 0.4, -0.5, 0.5 );
     //kinematics->Kine( 10, "mu+", 0.17, 0.4, -0.5, 0.5 );
 
-    // kinematics->Kine( 20, "e-", 0.15, 2, -1.2, 1.2 );
-    // kinematics->Kine( 20, "e+", 0.15, 2, -1.2, 1.2 );
+    kinematics->Kine( 20, "e-", 1.17, 2, -1.0, 1.0 );
+    kinematics->Kine( 20, "e+", 1.17, 2, -1.0, 1.0 );
 
     
 
@@ -90,17 +90,17 @@ void trig( Int_t n=1 )
     // la->SetLastDaughter( d1 );
 
 
-    for ( int i = 0; i < 10; i ++ ){
-      StarGenParticle * la = kinematics->AddParticle( "Lambda0" );
-    la->SetStatus(StarGenParticle::kFinal);
-    la->SetPx( 1.0 );
-    la->SetPy( 1.0 );
-    la->SetPz( 0.0 );
+    //for ( int i = 0; i < 10; i ++ ){
+    //  StarGenParticle * la = kinematics->AddParticle( "Lambda0" );
+    //la->SetStatus(StarGenParticle::kFinal);
+    //la->SetPx( 1.0 );
+    //la->SetPy( 1.0 );
+	//la->SetPz( 0.0 );
     
-    la->SetVx(0.0);
-    la->SetVy(0.0);
-    la->SetVz(0.0);
-    }
+    //la->SetVx(0.0);
+    //la->SetVy(0.0);
+    //la->SetVz(0.0);
+    //}
 
     chain->Make();
   }

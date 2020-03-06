@@ -56,19 +56,19 @@ void trig( Int_t n=1 )
 		l1 = lv1[iEntry];
 		l2 = lv2[iEntry];
 
-		StarGenParticle *ele = kinematics->AddParticle( "e-" );
+		StarGenParticle *ele = kinematics->AddParticle( "pi-" );
 		
 		ele->SetPx( l1.Px() );
 		ele->SetPy( l1.Py() );
 		ele->SetPz( l1.Pz() );
-		ele->SetMass( 0.0005109989461 );
+		ele->SetMass( 0.13957 );
 
-		StarGenParticle *pos = kinematics->AddParticle( "e+" );
+		StarGenParticle *pos = kinematics->AddParticle( "pi+" );
 		
 		pos->SetPx( l2.Px() );
 		pos->SetPy( l2.Py() );
 		pos->SetPz( l2.Pz() );
-		pos->SetMass( 0.0005109989461 );
+		pos->SetMass( 0.13957 );
 
 		TLorentzVector W = l1 + l2;
 		cout << "mass = " << W.M() << ", pT = " << W.Pt() << endl;
@@ -157,22 +157,28 @@ void starsim_gammagamma( Int_t nevents=1, Int_t rngSeed = 234234 )
 
 	// copy out the tree info
 	t->SetEstimate( t->GetEntries() + 1 );
-	t->Draw( "d1_mPt : d1_mEta : d1_mPhi", "", "goff", t->GetEntries(), 0 );
+
+	size_t max_entries = t->GetEntries();
+	if (max_entries > 500000 )
+		max_entries = 500000; 
+	t->Draw( "d1_mPt : d1_mEta : d1_mPhi", "", "goff", max_entries, 0 );
 	TLorentzVector l1, l2;
 
 	lv1 = new TLorentzVector[500000];
 	lv2 = new TLorentzVector[500000];
 
 	for ( int i = 0; i < t->GetSelectedRows(); i++ ) {
-		l1.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.0005109989461 );
+		//l1.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.0005109989461 );
+		l1.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.13957 );
 		lv1[i] = l1;
 	}
 	nPairs = t->GetSelectedRows();
 
 
-	t->Draw( "d2_mPt : d2_mEta : d2_mPhi", "", "goff", t->GetEntries(), 0 );
+	t->Draw( "d2_mPt : d2_mEta : d2_mPhi", "", "goff", max_entries, 0 );
 	for ( int i = 0; i < t->GetSelectedRows(); i++ ) {
-		l2.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.0005109989461 );
+		//l2.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.0005109989461 );
+		l2.SetPtEtaPhiM( t->GetVal(0)[i], t->GetVal(1)[i], t->GetVal(2)[i], 0.13957 );
 		lv2[i] = l2;
 	}
 

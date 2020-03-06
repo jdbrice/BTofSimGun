@@ -6,7 +6,7 @@ echo "JobID=$jobID"
 # Generate a random seed for the job
 # # crypto quality random number - should also work in parallel since thread safe
 trandom="$(od -vAn -N4 -tu4 < /dev/urandom | tr -d '[:space:]')"
-n_evts=1000
+n_evts=500
 root4star -b -q -l 'starsim_gammagamma.C( '"$n_evts"', '"$trandom"' )'
 
 mv pythia6.starsim.root starsim_${jobID}_${trandom}.GenTree.root
